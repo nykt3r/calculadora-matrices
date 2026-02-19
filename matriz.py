@@ -1,34 +1,35 @@
 class Matriz:
 
-    def __init__(self, filas, columnas, nombre):
+    def __init__(self, filas: int, columnas: int, nombre: str = ""):
+        if filas <= 0 or columnas <= 0:
+            raise ValueError("Las dimensiones deben ser mayores a 0")
+
         self.filas = filas
         self.columnas = columnas
         self.nombre = nombre
-        self.datos: list[list[float]] = []
+        self.datos = [[0.0 for _ in range(columnas)] for _ in range(filas)]
 
-    def __str__ (self):
-        return f'La matriz "{self.nombre}" es de tamaño {self.filas}x{self.columnas}'
+    def __str__(self):
+        resultado = f"Matriz {self.nombre} ({self.filas}x{self.columnas}):\n"
+        for fila in self.datos:
+            resultado += "  ".join(map(str, fila)) + "\n"
+        return resultado
 
-    def solicitar_valores(self):
-    rows = input_positive_int(f"Ingresa el numero de filas de la matriz {name}: ")
-    cols = input_positive_int(f"Ingresa el numero de columnas de la matriz {name}: ")
-    matrix = []
+    def ingresar_datos(self):
+        print(f"Ingresando datos para la matriz {self.nombre}")
 
-    print(f"Ingrese los valores de la matriz {name}:")
-    for i in range(rows):
-        row = []
-        for j in range(cols):
-            while True:
-                try:
-                    value = float(input(f"Elemento [{i}][{j}]: "))
-                    row.append(value)
-                    break
-                except ValueError:
-                    print("❌ Ingresa un número válido")
-        matrix.append(row)
+        for i in range(self.filas):
+            for j in range(self.columnas):
+                valor = float(input(f"Elemento [{i+1}][{j+1}]: "))
+                self.datos[i][j] = valor
 
-    return matrix
+############ Testeando creación de matriz e ingreso de datos: Exitoso
 
-m1 = Matriz(2,2,"A")
+nombre = input("Ingrese nombre de la matriz: ")
+filas = int(input("Ingrese tamaño de filas: "))
+columnas = int(input("Ingrese tamaño de columnas: "))
+
+m1 = Matriz(filas, columnas, nombre)
+m1.ingresar_datos()
 
 print(m1)

@@ -1,4 +1,4 @@
-from validadores import can_mult, can_sum_or_rest, input_positive_int
+from utils import can_mult, can_sum_or_rest, input_positive_int
 
 #Menú
 def print_menu():
