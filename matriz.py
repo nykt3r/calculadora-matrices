@@ -59,3 +59,31 @@ class Matriz:
         return resultado
     
     ## Operaciones por un escalar ##
+    
+    def suma_escalar(self, k):
+        resultado = Matriz(self.filas, self.columnas)
+        for i in range(self.filas):
+            for j in range(self.columnas):
+                resultado.datos[i][j] = self.datos[i][j] + k
+        return resultado
+    
+    def resta_escalar(self, k):
+        resultado = Matriz(self.filas, self.columnas)
+        for i in range(self.filas):
+            for j in range(self.columnas):
+                resultado.datos[i][j] = self.datos[i][j] - k
+        return resultado
+    
+    def multiplicacion_escalar(self, k):
+        resultado = Matriz(self.filas, self.columnas)
+        for i in range(self.filas):
+            for j in range(self.columnas):
+                resultado.datos[i][j] = self.datos[i][j] * k
+        return resultado
+    
+    def division_escalar(self, k):
+        resultado = Matriz(self.filas, self.columnas)
+        for i in range(self.filas):
+            for j in range(self.columnas):
+                resultado.datos[i][j] = self.datos[i][j] / k
+        return resultado
