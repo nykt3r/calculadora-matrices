@@ -1,4 +1,4 @@
-from utils import validar_misma_dimension, validar_producto
+from utils import validar_misma_dimension, validar_producto, validar_escalar, validar_no_cero
 
 class Matriz:
     # Constructor: Valida tipo de datos y valores positivos para filas y columnas
@@ -61,6 +61,7 @@ class Matriz:
     ## Operaciones por un escalar ##
     
     def suma_escalar(self, k):
+        validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
             for j in range(self.columnas):
@@ -68,6 +69,7 @@ class Matriz:
         return resultado
     
     def resta_escalar(self, k):
+        validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
             for j in range(self.columnas):
@@ -75,6 +77,7 @@ class Matriz:
         return resultado
     
     def multiplicacion_escalar(self, k):
+        validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
             for j in range(self.columnas):
@@ -82,6 +85,8 @@ class Matriz:
         return resultado
     
     def division_escalar(self, k):
+        validar_no_cero(k)
+        validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
             for j in range(self.columnas):

@@ -14,6 +14,12 @@ class NoCuadradaError(MatrizError):
 class NoInvertibleError(MatrizError):
     pass
 
+class EscalarError(MatrizError):
+    pass
+
+class EnteroError(MatrizError):
+    pass
+
 
 def validar_misma_dimension(A, B):
     if A.filas != B.filas or A.columnas != B.columnas:
@@ -33,3 +39,18 @@ def validar_cuadrada(A):
 def validar_invertible(A):
     if A.determinante() == 0:
         raise NoInvertibleError("La matriz no es invertible (determinante = 0).")
+    
+def validar_no_cero(k):
+    if k == 0:
+        raise EscalarError("No se puede dividir por cero, ingresa otro número")
+
+def validar_escalar(k):
+    if not isinstance(k, (int, float)):
+        raise EscalarError("El escalar debe ser un número.")
+
+def validar_entero_positivo(valor):
+    if not isinstance(valor, int):
+        raise EnteroError("Debes ingresar un número entero.")
+    
+    if valor <= 0:
+        raise EnteroError("El número debe ser mayor que 0.")
