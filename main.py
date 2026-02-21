@@ -1,56 +1,17 @@
 from matriz import Matriz
+from menu import iniciar_menu
+from funciones_auxiliares import crear_matriz, pedir_escalar
 from utils import (
-    pedir_entero_positivo,
     DimensionError,
     NoCuadradaError,
     NoInvertibleError,
     EscalarError
 )
 
-# FUNCIONES AUXILIARES
-
-def crear_matriz():
-    print("\n=== CREAR MATRIZ ===")
-    nombre = input("Nombre de la matriz: ")
-    filas = pedir_entero_positivo("Número de filas: ")
-    columnas = pedir_entero_positivo("Número de columnas: ")
-    matriz = Matriz(filas, columnas, nombre)
-    matriz.ingresar_datos()
-    return matriz
-
-def pedir_escalar():
-    while True:
-        try:
-            k = float(input("Ingrese el valor del escalar: "))
-            return k
-        except ValueError:
-            print("Error: Debes ingresar un número válido.")
-
-def menu():
-    print("\n" + "="*50)
-    print("           CALCULADORA DE MATRICES")
-    print("="*50)
-    print("1. Sumar matrices")
-    print("2. Restar matrices")
-    print("3. Multiplicar matrices")
-    print("4. Producto Hadamard")
-    print("5. Sumar escalar")
-    print("6. Restar escalar")
-    print("7. Multiplicar por escalar")
-    print("8. Dividir por escalar")
-    print("9. Determinante")
-    print("10. Adjunta")
-    print("11. Inversa")
-    print("12. Traza")
-    print("13. Transpuesta")
-    print("14. Salir")
-    print("="*50)
-
 # PROGRAMA PRINCIPAL
-
 def main():
     while True:
-        menu()
+        iniciar_menu()
         opcion = input("Seleccione una opción: ")
         try:
             # Operaciones entre matrices 
