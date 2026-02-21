@@ -1,4 +1,11 @@
-from utils import validar_misma_dimension, validar_producto, validar_division, validar_escalar, validar_cuadrada, validar_invertible
+from utils import (
+    validar_misma_dimension, 
+    validar_producto, 
+    validar_division, 
+    validar_escalar, 
+    validar_cuadrada, 
+    validar_invertible
+)
 
 class Matriz:
     # Constructor: Valida tipo de datos y valores positivos para filas y columnas
