@@ -1,4 +1,4 @@
-from utils import validar_misma_dimension, validar_producto, validar_escalar, validar_no_cero
+from utils import validar_misma_dimension, validar_producto, validar_division, validar_escalar
 
 class Matriz:
     # Constructor: Valida tipo de datos y valores positivos para filas y columnas
@@ -21,11 +21,18 @@ class Matriz:
         print(f"Ingresando datos para la matriz {self.nombre}")
         for i in range(self.filas):
             for j in range(self.columnas):
-                valor = float(input(f"Elemento [{i+1}][{j+1}]: "))
-                self.datos[i][j] = valor
+                while True:
+                    try:
+                        valorStr = input(f"Elemento [{i+1}][{j+1}]: ")
+                        valor = float(valorStr)
+                        self.datos[i][j] = valor
+                        break
+                    except Exception as e:
+                        print("Error:", e)
+                        print("Intente nuevamente.\n")
 
     ## Operaciones entre matrices ##
-    def __add__(self, matriz_b: Matriz): 
+    def __add__(self, matriz_b): 
         validar_misma_dimension(self, matriz_b)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
@@ -33,7 +40,7 @@ class Matriz:
                 resultado.datos[i][j] = self.datos[i][j] + matriz_b.datos[i][j]
         return resultado
     
-    def __sub__(self, matriz_b: Matriz): 
+    def __sub__(self, matriz_b): 
         validar_misma_dimension(self, matriz_b)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
@@ -41,7 +48,7 @@ class Matriz:
                 resultado.datos[i][j] = self.datos[i][j] - matriz_b.datos[i][j]
         return resultado
     
-    def __mul__(self, matriz_b: Matriz):
+    def __mul__(self, matriz_b):
         validar_producto(self, matriz_b)
         resultado = Matriz(self.filas, matriz_b.columnas)
         for i in range(self.filas):
@@ -50,7 +57,7 @@ class Matriz:
                     resultado.datos[i][j] += self.datos[i][k] * matriz_b.datos[k][j]
         return resultado    
     
-    def hadamard(self, matriz_b: Matriz):
+    def hadamard(self, matriz_b):
         validar_misma_dimension(self, matriz_b)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
@@ -60,7 +67,7 @@ class Matriz:
     
     ## Operaciones por un escalar ##
     
-    def suma_escalar(self, k):
+    def sumar_escalar(self, k):
         validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
@@ -68,7 +75,7 @@ class Matriz:
                 resultado.datos[i][j] = self.datos[i][j] + k
         return resultado
     
-    def resta_escalar(self, k):
+    def restar_escalar(self, k):
         validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
@@ -76,7 +83,7 @@ class Matriz:
                 resultado.datos[i][j] = self.datos[i][j] - k
         return resultado
     
-    def multiplicacion_escalar(self, k):
+    def multiplicar_escalar(self, k):
         validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
@@ -84,9 +91,9 @@ class Matriz:
                 resultado.datos[i][j] = self.datos[i][j] * k
         return resultado
     
-    def division_escalar(self, k):
-        validar_no_cero(k)
+    def dividir_escalar(self, k):
         validar_escalar(k)
+        validar_division(k)
         resultado = Matriz(self.filas, self.columnas)
         for i in range(self.filas):
             for j in range(self.columnas):

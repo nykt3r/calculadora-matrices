@@ -1,77 +1,56 @@
 from matriz import Matriz
-from utils import EscalarError, validar_escalar, validar_no_cero, EnteroError, validar_entero_positivo, DimensionError
+from utils import EscalarError, validar_entero_positivo, DimensionError, pedir_entero_positivo
 ############ TESTING #############
 
-## FUNCIÓN PARA VALIDAR QUE LO INGRESADO SEA UN ENTERO
+# # MATRIZ 1
+# nombre1 = input("Ingrese nombre de la matriz: ")
+# filas1 = pedir_entero_positivo("Ingrese tamaño de filas: ")
+# columnas1 = pedir_entero_positivo("Ingrese tamaño de columnas: ")
 
-def pedir_entero_positivo(mensaje):
-    while True:
-        try:
-            valor = int(input(mensaje))
-            validar_entero_positivo(valor)
-            return valor
-        
-        except ValueError:
-            print("Error: Debes ingresar un número entero válido.")
-        
-        except EnteroError as e:
-            print(f"Error: {e}")
+# m1 = Matriz(filas1, columnas1, nombre1)
+# m1.ingresar_datos()
 
-# MATRIZ 1
-nombre1 = input("Ingrese nombre de la matriz: ")
-filas1 = pedir_entero_positivo("Ingrese tamaño de filas: ")
-columnas1 = pedir_entero_positivo("Ingrese tamaño de columnas: ")
+# print(m1)
 
+# # MATRIZ 2
+# nombre2 = input("Ingrese nombre de la matriz: ")
+# filas2 = pedir_entero_positivo("Ingrese tamaño de filas: ")
+# columnas2 = pedir_entero_positivo("Ingrese tamaño de columnas: ")
 
-m1 = Matriz(filas1, columnas1, nombre1)
-m1.ingresar_datos()
+# m2 = Matriz(filas2, columnas2, nombre2)
+# m2.ingresar_datos()
 
-print(m1)
+# print(m2)
 
-# MATRIZ 2
-nombre2 = input("Ingrese nombre de la matriz: ")
-filas2 = pedir_entero_positivo("Ingrese tamaño de filas: ")
-columnas2 = pedir_entero_positivo("Ingrese tamaño de columnas: ")
+# ## OPERACIONES ENTRE MATRICES
 
-m2 = Matriz(filas2, columnas2, nombre2)
-m2.ingresar_datos()
+# print("\n OPERACIONES ENTRE MATRICES:")
 
-print(m2)
+# try:
+#     print("Suma:")
+#     print(m1 + m2)
+# except DimensionError as e:
+#     print(f"Error en suma: {e}")
 
-### OPERACIONES ENTRE MATRICES
+# try:
+#     print("Resta:")
+#     print(m1 - m2)
+# except DimensionError as e:
+#     print(f"Error en resta: {e}")
 
-print("\n OPERACIONES ENTRE MATRICES:")
+# try:
+#     print("Multiplicación:")
+#     print(m1 * m2)
+# except DimensionError as e:
+#     print(f"Error en multiplicación: {e}")
 
-try:
-    print("Suma:")
-    print(m1 + m2)
-except DimensionError as e:
-    print(f"Error en suma: {e}")
-
-try:
-    print("Resta:")
-    print(m1 - m2)
-except DimensionError as e:
-    print(f"Error en resta: {e}")
-
-try:
-    print("Multiplicación:")
-    print(m1 * m2)
-except DimensionError as e:
-    print(f"Error en multiplicación: {e}")
-
-try:
-    print("Hadamard:")
-    print(m1.hadamard(m2))
-except DimensionError as e:
-    print(f"Error en Hadamard: {e}")
-
-## PENDIENTE DE PRUEBA - SE PUSHEA SIN TESTEAR ##
-
-
+# try:
+#     print("Hadamard:")
+#     print(m1.hadamard(m2))
+# except DimensionError as e:
+#     print(f"Error en Hadamard: {e}")
 
 ## OPERACIONES DE MATRIZ POR ESCALAR
-
 
 # MATRIZ 3 PARA PRUEBAS DE ESCALAR
 
@@ -86,42 +65,39 @@ m3.ingresar_datos()
 print(m3)
 
 ##PEDIR ESCALAR
-
+## TRY-EXCEPT para dividir_escalar
 while True:
     try:
         k = float(input("Ingresa la escalar: "))
-        validar_escalar(k)
-        validar_no_cero(k)
+        resultado_escalar = m3.dividir_escalar(k)
+        print("Resultado de la división: ")
+        print(resultado_escalar)
         break
-    
     except ValueError:
         print("Debes ingresar un número.")
-    
     except EscalarError as e:
-        print(e)
+        print("Error ESCALAR ", e)
+
 
 ##OPERACIONES
 
 ## SUMA
 
-resultado_escalar = m3.suma_escalar(k)
+# resultado_escalar = m3.sumar_escalar(k)
 
-print("Resultado de la suma escalar:")
-print(resultado_escalar)
+# print("Resultado de la suma escalar:")
+# print(resultado_escalar)
 
 ## RESTA
 
-resultado_escalar = m3.resta_escalar(k)
+# resultado_escalar = m3.restar_escalar(k)
 
-print("Resultado de la resta escalar: ")
-print(resultado_escalar)
+# print("Resultado de la resta escalar: ")
+# print(resultado_escalar)
 
-## MULTIPLICACIÓN:
+# ## MULTIPLICACIÓN:
 
-resultado_escalar = m3.multiplicacion_escalar(k)
-print("Resultado de la multiplicación escalar: ")
-print(resultado_escalar)
+# resultado_escalar = m3.multiplicar_escalar(k)
+# print("Resultado de la multiplicación escalar: ")
+# print(resultado_escalar)
 
-resultado_escalar = m3.division_escalar(k)
-print("Resultado de la diviión: ")
-print(resultado_escalar)
