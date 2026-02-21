@@ -29,8 +29,8 @@ def validar_cuadrada(A):
     if A.filas != A.columnas:
         raise NoCuadradaError("La matriz debe ser cuadrada.")
 
-def validar_invertible(A):
-    if A.determinante() == 0:
+def validar_invertible(det):
+    if det == 0:
         raise NoInvertibleError("La matriz no es invertible (determinante = 0).")
     
 def validar_division(k):

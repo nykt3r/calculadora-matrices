@@ -1,4 +1,4 @@
-from utils import validar_misma_dimension, validar_producto, validar_division, validar_escalar, validar_cuadrada
+from utils import validar_misma_dimension, validar_producto, validar_division, validar_escalar, validar_cuadrada, validar_invertible
 
 class Matriz:
     # Constructor: Valida tipo de datos y valores positivos para filas y columnas
@@ -31,7 +31,7 @@ class Matriz:
                         print("Error:", e)
                         print("Intente nuevamente.\n")
 
-    ## Operaciones entre matrices ##
+## Operaciones entre matrices ##
     def __add__(self, matriz_b): 
         validar_misma_dimension(self, matriz_b)
         resultado = Matriz(self.filas, self.columnas)
@@ -65,7 +65,7 @@ class Matriz:
                 resultado.datos[i][j] = self.datos[i][j] * matriz_b.datos[i][j]
         return resultado
     
-    ## Operaciones por un escalar ##
+## Operaciones por un escalar ##
     def sumar_escalar(self, k):
         validar_escalar(k)
         resultado = Matriz(self.filas, self.columnas)
@@ -135,10 +135,36 @@ class Matriz:
             determinante += cofactor
         return determinante 
     
-    # def calcular_adjunta():
-
-    # def calcular_inversa():
-
+    def calcular_adjunta(self):
+        validar_cuadrada(self)
+        # Caso especial 1x1
+        if self.filas == 1:
+            adj = Matriz(1, 1, self.nombre + "_adj")
+            adj.datos[0][0] = 1
+            return adj
+        # Paso 1: matriz de cofactores
+        cofactores = Matriz(self.filas, self.columnas, self.nombre + "_cof")
+        for i in range(self.filas):
+            for j in range(self.columnas):
+                menor = self.obtener_menor(i, j)
+                signo = (-1) ** (i + j)
+                cofactores.datos[i][j] = signo * menor.calcular_determinante()
+        # Paso 2: transponer la matriz de cofactores
+        adjunta = cofactores.calcular_transpuesta()
+        adjunta.nombre = self.nombre + "_adj"
+        return adjunta
+    
+    def calcular_inversa(self):
+        validar_cuadrada(self)
+        det = self.calcular_determinante()
+        validar_invertible(det)
+        adjunta = self.calcular_adjunta()
+        inversa = Matriz(self.filas, self.columnas, self.nombre + "_inv")
+        for i in range(self.filas):
+            for j in range(self.columnas):
+                inversa.datos[i][j] = adjunta.datos[i][j] / det
+        return inversa
+    
     def calcular_traza(self):
         validar_cuadrada(self)
         suma = 0

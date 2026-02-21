@@ -1,5 +1,5 @@
 from matriz import Matriz
-from utils import pedir_entero_positivo, NoCuadradaError
+from utils import NoInvertibleError, pedir_entero_positivo, NoCuadradaError
 
 # print("=== CALCULO DE TRAZA ===")
 
@@ -40,7 +40,46 @@ from utils import pedir_entero_positivo, NoCuadradaError
 # print("\nMatriz transpuesta:")
 # print(transpuesta)
 
-print("\n=== CALCULO DE DETERMINANTE ===")
+# print("\n=== CALCULO DE DETERMINANTE ===")
+
+# nombre = input("Ingrese nombre de la matriz: ")
+# filas = pedir_entero_positivo("Ingrese tamaño de filas: ")
+# columnas = pedir_entero_positivo("Ingrese tamaño de columnas: ")
+
+# m = Matriz(filas, columnas, nombre)
+# m.ingresar_datos()
+
+# print("\nMatriz ingresada:")
+# print(m)
+
+# try:
+#     det = m.calcular_determinante()
+#     print("\nEl determinante es:", det)
+
+# except NoCuadradaError as e:
+#     print("\nError:", e)
+
+# print("\n=== CALCULO DE MATRIZ ADJUNTA ===")
+
+# nombre = input("Ingrese nombre de la matriz: ")
+# filas = pedir_entero_positivo("Ingrese tamaño de filas: ")
+# columnas = pedir_entero_positivo("Ingrese tamaño de columnas: ")
+
+# m = Matriz(filas, columnas, nombre)
+# m.ingresar_datos()
+
+# print("\nMatriz ingresada:")
+# print(m)
+
+# try:
+#     adj = m.calcular_adjunta()
+#     print("\nMatriz adjunta:")
+#     print(adj)
+
+# except NoCuadradaError as e:
+#     print("\nError:", e)
+
+print("\n=== CALCULO DE MATRIZ INVERSA ===")
 
 nombre = input("Ingrese nombre de la matriz: ")
 filas = pedir_entero_positivo("Ingrese tamaño de filas: ")
@@ -53,8 +92,12 @@ print("\nMatriz ingresada:")
 print(m)
 
 try:
-    det = m.calcular_determinante()
-    print("\nEl determinante es:", det)
+    inversa = m.calcular_inversa()
+    print("\nMatriz inversa:")
+    print(inversa)
 
 except NoCuadradaError as e:
+    print("\nError:", e)
+
+except NoInvertibleError as e:
     print("\nError:", e)
