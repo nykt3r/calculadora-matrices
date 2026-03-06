@@ -17,6 +17,15 @@ class EscalarError(MatrizError):
 class EnteroError(MatrizError):
     pass
 
+class DimensionesInicialesError(MatrizError):
+    pass
+
+def DimensionesIniciales(filas, columnas):
+    if filas <= 0 or columnas <= 0:
+        raise DimensionesInicialesError("Las dimensiones deben ser mayores a 0")
+    if filas >= 7 or columnas >= 7:
+        raise DimensionesInicialesError("Las dimensiones superan las permitidas, deben ser menores a 7")
+
 def validar_misma_dimension(A, B):
     if A.filas != B.filas or A.columnas != B.columnas:
         raise DimensionError("Las matrices deben tener las mismas dimensiones.")

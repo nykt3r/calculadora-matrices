@@ -4,14 +4,14 @@ from utils import (
     validar_division, 
     validar_escalar, 
     validar_cuadrada, 
-    validar_invertible
+    validar_invertible,
+    DimensionesIniciales
 )
-
+import random 
 class Matriz:
     # Constructor: Valida tipo de datos y valores positivos para filas y columnas
     def __init__(self, filas: int, columnas: int, nombre: str = ""):
-        if filas <= 0 or columnas <= 0:
-            raise ValueError("Las dimensiones deben ser mayores a 0")
+        DimensionesIniciales(filas, columnas)
         self.filas = filas
         self.columnas = columnas
         self.nombre = nombre
@@ -30,13 +30,14 @@ class Matriz:
             for j in range(self.columnas):
                 while True:
                     try:
-                        valorStr = input(f"Elemento [{i+1}][{j+1}]: ")
-                        valor = float(valorStr)
+                        valor = random.randint(-10, 10)
                         self.datos[i][j] = valor
+
                         break
                     except Exception as e:
                         print("Error:", e)
                         print("Intente nuevamente.\n")
+    
 
 ## Operaciones entre matrices ##
     def __add__(self, matriz_b): 
